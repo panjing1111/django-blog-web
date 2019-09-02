@@ -17,12 +17,17 @@
             <div class="col-12 alert alert-success">作者：{{ article.author }}
                 <!--是否显示删除、编辑文章的按钮-->
                 {% if article.author == user %}
-                    <a href="#" onclick="confirm_delete()">删除文章</a>
-                · <a href="{% url "article:article_update" article.id %}">编辑文章</a>
+                    <a href="#" onclick="confirm_delete()">删除博客</a>
+                ·   <a href="{% url 'article:article_update' article.id %}">编辑博客</a>
+                    <a href="{% url 'article:user_article_list' article.author.id %}">我的博客</a>
+                {% else %}
+                    <a href="{% url 'article:user_article_list' article.author.id %}">他的博客</a>
                 {% endif %}
                  <div>
                     浏览：{{ article.total_views }}
                 </div>
+
+
             </div>
         </div>
         <!-- 新增的目录 -->
