@@ -45,6 +45,20 @@ def article_list(request):
     context = {'articles': articles, 'order': order, 'search': search }
     return render(request,'article/list.html',context)
 
+# 指定作者的文章列表
+def user_article_list(request,id):
+    user = User.objects.get(id=id)
+    article_list = ArticlePost.objects.filter(author=user)
+    # # 每页显示 2 篇文章
+    # paginator = Paginator(article_list, 6)
+    # # 获取 url 中的页码
+    # page = request.GET.get('page')
+    # # 将导航对象相应的页码内容返回给 articles
+    # articles = paginator.get_page(page)
+    # # 需要传递给模板（templates）的对象
+    context = {'articles': article_list,}
+    return render(request,'article/list.html',context)
+
 # 文章详情
 def article_detail(request, id):
     # 当前看文章的用户
@@ -71,7 +85,7 @@ def article_detail(request, id):
     # 载入模板，并返回context对象
     return render(request, 'article/detail.html', context)
 
-# 写文章
+# 写博客
 @login_required(login_url='/userprofile/login/')
 def article_create(request):
     if request.method == 'POST':
