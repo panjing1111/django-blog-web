@@ -15,7 +15,7 @@ class UserLoginForm(forms.Form):
     password = forms.CharField()
 
 
-# 注册用户表单
+# 注册用户表单(注册用户的表单只有最基本的账号密码手机号，因此继承User模型就可)
 class UserRegisterForm(forms.ModelForm):
     # 复写 User 的密码
     password = forms.CharField()
@@ -34,7 +34,7 @@ class UserRegisterForm(forms.ModelForm):
             raise forms.ValidationError("密码输入不一致,请重试。")
 
 
-# 用户编辑的表单
+# 用户编辑的表单(用户编辑的表单有其他用户属性，因此需继承扩展User后的模型：Profile)
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
