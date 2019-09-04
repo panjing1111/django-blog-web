@@ -87,30 +87,6 @@ def article_detail(request, id):
     # 载入模板，并返回context对象
     return render(request, 'article/detail.html', context)
 
-# 写博客
-@login_required(login_url='/userprofile/login/')
-def article_create(request):
-    if request.method == 'POST':
-        # 将POST数据交给ArticlePostForm处理，创建了一个实例
-        article_post_form = ArticlePostForm(data=request.POST)
-        # 判断提交的数据是否满足模型的要求
-        if article_post_form.is_valid():
-            # 保存数据
-            new_article = article_post_form.save(commit=False)
-            # 指定目前登录的用户为作者
-            new_article.author = User.objects.get(id=request.user.id)
-            new_article.save()
-            # 完成后返回到文章列表
-            return redirect("article:article_list")
-        else:
-            # 返回错误提示
-            return HttpResponse("表单内容有误，请重新填写。")
-    elif request.method == 'GET':
-        # 同上创建表单类实例,不过是空的
-        article_post_form = ArticlePostForm()
-        context = {"article_post_form":article_post_form}
-        return render(request,'article/create.html',context)
-
 # 将写博客的功能由函数视图改为类视图
 class ArticleCreateView(View):
     # 给get与post方法都添加装饰器，在点击写博客的按钮和提交博客按钮时候都要检查
@@ -133,7 +109,6 @@ class ArticleCreateView(View):
             new_article.save()
             return redirect('article:article_list')
 
-
 # 删除文章
 @login_required(login_url='/userprofile/login/')
 def article_delete(request,id):
@@ -145,8 +120,6 @@ def article_delete(request,id):
         return redirect("article:article_list")
     else:
         return HttpResponse("没有权限删除文章")
-
-
 
 # 更新文章
 @login_required(login_url='/userprofile/login/')

@@ -75,6 +75,7 @@ class UserRegisterView(View):
 #     else:
 #         return HttpResponse("你没有删除操作的权限。")
 
+
 # 编辑用户信息 (name='dispatch'代表给这个类的所有方法都添加装饰器)
 @method_decorator(login_required(login_url='/userprofile/login/'), name='dispatch')
 class UserEditView(View):
