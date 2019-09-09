@@ -28,7 +28,7 @@ conf.read(CONFIG_PATH,encoding="utf-8-sig")
 SECRET_KEY = '=a61kbnnwxu_wc-u_&517qgseuzxmrn*vo7t2qit*y(0!a3uqk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -46,7 +46,17 @@ INSTALLED_APPS = [
     'article',
     'userprofile',
     'password_reset',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.weixin',
 ]
+# 设置站点
+SITE_ID = 1
+
+# 登录成功后重定向地址
+LOGIN_REDIRECT_URL = '/article/article-list'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,6 +85,16 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
 
 WSGI_APPLICATION = 'my_blog.wsgi.application'
 

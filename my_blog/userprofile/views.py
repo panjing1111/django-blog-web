@@ -11,6 +11,7 @@ from .forms import ProfileForm
 from django.views.generic import View
 # 类视图的装饰器要通过method_decorator添加
 from django.utils.decorators import method_decorator
+# from allauth.account.views import LoginView
 
 # Create your views here.
 
@@ -36,6 +37,10 @@ class UserLoginView(View):
                 return HttpResponse("账号或密码输入有误。请重新输入~")
         else:
             return HttpResponse("账号或密码输入不合法~")
+
+# class UserLoginView(LoginView):
+#     pass
+
 
 # 用户退出
 def user_logout(request):
