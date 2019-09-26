@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="http://www.baidu.com"><img src="{% static '/images/baidu.png' %}" width="80px"></a>
+	</div>
+	<div>
+	    <ul class="nav navbar-nav" role="navigation">
+			<li><a href="{% url 'blog:blog_title' %}">Blgo</a></li>
+	    </ul>
+	    <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
+			<!--如果用户已经登录，应该显示用户名，否则显示LOGIN-->
+			{% if user.is_authenticated %}
+			<li><a href="#">{{ user.username }}</a></li>
+			<li><a href="{% url 'account:user_logout'%}">Logout</a></li>
+			{% else %}
+			<li><a href="{% url 'account:user_login'%}">LOGIN</a></li>
+			{% endif %}
+
+	    </ul>
+	</div>
+    </nav>
+</div>

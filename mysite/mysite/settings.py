@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -55,8 +56,8 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'APP_DIRS': True, # 允许django按照默认方法查找模板(默认允许 )
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -122,4 +123,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# 静态文件访问路径
 STATIC_URL = '/static/'
+# 静态文件存放目录
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
+)
+
+# 使用django自带的登录模块登录后默认跳转的路径 前面的/代表根路径
+LOGIN_REDIRECT_URL = '/blog/'

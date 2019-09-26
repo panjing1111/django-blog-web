@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 # 文章模型
 class BlogArticles(models.Model):
+    objects = models.Manager()
     title = models.CharField(max_length=100)
     # 作者字段是一个外键，多对一
     # related_name 代表可以用过User的blog_posts反向查询到BlogArticles
