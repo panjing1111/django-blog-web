@@ -81,8 +81,8 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'USER': 'root',
-        'PASSWORD': 'mysql11',
-        'NAME': 'laoqi_django',
+        'PASSWORD': '',
+        'NAME': 'gaohong', # 需提前在创建名为gaohong的数据库，并执行命令 python manager.py migrate
     }
 }
 
