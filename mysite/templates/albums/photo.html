@@ -20,11 +20,10 @@
         </div>
         <!-- 文章发布时间 -->
         <div class="form-group">
-            <label for="upload_time">时间：</label>
-            <!-- 只读的输入框 -->
-            <input type="text" readonly="readonly" name="upload_time" value={{ photo.upload_time }}>
+            <label for="upload_time">当前时间：{{ photo.upload_time }}</label>
         </div>
-        <!-- 提交按钮 -->
+
+        <!-- 提交按钮 提交时只提交input标签内容 -->
         <button type="submit" class="btn btn-primary">完成</button>
     </form>
 
