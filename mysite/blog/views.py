@@ -11,5 +11,8 @@ def blog_title(request):
 
 def blog_article(request, article_id):
     article = get_object_or_404(BlogArticles, id=article_id)
-    publish =  article.publish
+    publish = article.publish
     return render(request,'blog/content.html',{'article':article,'publish':publish})
+
+def add_blog(request):
+    '''发表博客'''

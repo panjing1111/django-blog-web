@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load staticfiles %}  <!--引入静态文件 -->
 <div class="container">
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
@@ -6,17 +6,43 @@
 	</div>
 	<div>
 	    <ul class="nav navbar-nav" role="navigation">
-			<li><a href="{% url 'blog:blog_title' %}">Blgo</a></li>
+			<li><a href="{% url 'blog:blog_title' %}">首页</a></li>
 	    </ul>
-	    <ul class="nav navbar-nav navbar-right" style="margin-right:10px">
+
+        <ul class="nav navbar-nav" role="navigation">
+            <!--如果用户已经登录，跳转到相册页面，否则跳转到登录界面-->
+            {% if user.is_authenticated %}
+                <li><a href="#">我的相册</a></li>
+			{% else %}
+			    <li><a href="{% url 'account:user_login'%}">我的相册</a></li>
+			{% endif %}
+	    </ul>
+
+        <ul class="nav navbar-nav" role="navigation">
+            <!--如果用户已经登录，跳转到视频页面，否则跳转到登录界面-->
+            {% if user.is_authenticated %}
+                <li><a href="#">我的视频</a></li>
+			{% else %}
+			    <li><a href="{% url 'account:user_login'%}">我的视频</a></li>
+			{% endif %}
+	    </ul>
+
+	    <ul class="nav navbar-nav navbar-right" style="margin-right:20px">
 			<!--如果用户已经登录，应该显示用户名，否则显示LOGIN-->
 			{% if user.is_authenticated %}
 			<li><a href="#">{{ user.username }}</a></li>
-			<li><a href="{% url 'account:user_logout'%}">Logout</a></li>
+			<li><a href="{% url 'account:user_logout'%}">退出</a></li>
 			{% else %}
-			<li><a href="{% url 'account:user_login'%}">LOGIN</a></li>
+			<li><a href="{% url 'account:user_login'%}">登录</a></li>
 			{% endif %}
-
+	    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <!--如果用户已经登录，跳转到发表动态页面，否则跳转到登录界面-->
+            {% if user.is_authenticated %}
+                <li><a href="#">发表动态</a></li>
+			{% else %}
+			    <li><a href="{% url 'account:user_login'%}">发表动态</a></li>
+			{% endif %}
 	    </ul>
 	</div>
     </nav>
